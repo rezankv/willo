@@ -1,0 +1,16 @@
+version: '3'
+services:
+  awesome_todo:
+    container_name: awesome_todo
+    image: awesome_todo
+    command: npm run dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./:/app
+      - awesome-todo-node-modules:/app/node_modules
+volumes:
+  awesome-todo-node-modules: null

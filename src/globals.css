@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background-default: #f8f8f8;
+    --background-paper: #ffffff;
+
+    --primary-default: #7366f0;
+
+    --text-default: #6d6b7b;
+    --text-mutated: #b9b9c3;
+
+    --hr: #ebe9f0;
+
+    --error-default: #ea5354;
+
+    /* tags */
+    --purple: #7366f0;
+    --purple-light: #eeedfd;
+
+    --green: #29c76f;
+    --green-light: #e9f8ee;
+
+    --orange: #ff9e43;
+    --orange-light: #fff3e9;
+
+    --cyan: #03cfe7;
+    --cyan-light: #e7f9fc;
+  }
+}
