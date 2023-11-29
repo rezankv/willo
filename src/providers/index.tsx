@@ -1,9 +1,14 @@
-import React from 'react'
+import RouterProvider from "../router";
+import TaskProvider from "./task";
 
 const Providers = () => {
   return (
-    <div>Providers</div>
-  )
-}
+    <>
+      <TaskProvider>
+        <RouterProvider />
+      </TaskProvider>
+    </>
+  );
+};
 
-export default Providers
+export default Providers;
