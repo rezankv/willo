@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   :root {
     --background-default: #f8f8f8;
     --background-paper: #ffffff;
@@ -10,7 +11,7 @@
     --primary-default: #7366f0;
     --primary-contrast-text: #ffffff;
 
-    --text-default: #6d6b7b;
+    --text-default: #6e6b7b;
     --text-mutated: #b9b9c3;
 
     --hr: #ebe9f0;
@@ -29,5 +30,8 @@
 
     --cyan: #03cfe7;
     --cyan-light: #e7f9fc;
+  }
+  body{
+    font-family: Montserrat,Arial, Helvetica, sans-serif;
   }
 }

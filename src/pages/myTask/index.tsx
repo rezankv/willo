@@ -2,7 +2,11 @@ import React from 'react'
 
 const index = () => {
   return (
-    <div>index</div>
+    <div>
+
+      {/* search box */}
+      {/* tasks list */}
+    </div>
   )
 }
 
