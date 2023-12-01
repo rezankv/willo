@@ -1,7 +1,7 @@
 // import { TagEnum } from "../enums";
 
 interface ITask {
-  id: string;
+  id?: string;
   title: string;
   // tags?: TagEnum[];
   description?: string;

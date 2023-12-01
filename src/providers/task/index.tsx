@@ -8,10 +8,7 @@ interface Props {
   children: ReactNode;
 }
 const TaskProvider = ({ children }: Props) => {
-  const [tasks, setTasks] = usePersistState<TaskModel[]>(
-    JSON.stringify([]),
-    TASKS_KEY
-  );
+  const [tasks, setTasks] = usePersistState<TaskModel[]>([], TASKS_KEY);
 
   const getTaskById = (taskId: string) =>
     tasks.find((task) => task.getId() === taskId) || new TaskModel();

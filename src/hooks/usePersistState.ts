@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 const usePersistState = <T>(
-  defaultValue: string,
+  defaultValue: T,
   key: string
 ): [T, Dispatch<SetStateAction<T>>] => {
   const [value, setValue] = useState<T>(() => {
-    const persistedValue = window.localStorage.getItem(key);
+    const persistedValue = localStorage.getItem(key);
     return persistedValue !== null ? JSON.parse(persistedValue) : defaultValue;
   });
   useEffect(() => {

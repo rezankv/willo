@@ -7,7 +7,6 @@ const useLogic = () => {
   const [selectedTask, setSelectedTask] = useState(new TaskModel());
 
 
-  console.log(selectedTask)
   return {
     isAddTaskDialogOpen,
     setIsAddTaskDialogOpen,
