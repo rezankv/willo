@@ -10,7 +10,7 @@ const Searchbar = () => {
         <Search className="w-4 h-4" />
         <Input
           placeholder="search here..."
-          className="focus-visible:border-none border-none shadow-none"
+          className="focus-visible:border-none border-none !shadow-none"
         />
       </div>
       <Menu />

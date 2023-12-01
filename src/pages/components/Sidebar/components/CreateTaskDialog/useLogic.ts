@@ -3,27 +3,32 @@ import { CreateTaskSchema, createTaskSchema } from "../../../../../validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useTask from "../../../../../hooks/useTask";
 import { TaskModel } from "../../../../../models";
+import toast from "react-hot-toast";
 
 const useLogic = () => {
   const {
     control,
-    watch,
     handleSubmit,
-    formState: { errors, isValid },
+    reset,
+    formState: {isDirty, isValid },
   } = useForm<CreateTaskSchema>({
     mode: "onChange",
     resolver: zodResolver(createTaskSchema),
-    defaultValues: {},
+    defaultValues: {
+      title: "",
+      description: "",
+    },
   });
 
   const { createTask } = useTask();
 
-  const createTaskHandler = (data: CreateTaskSchema) =>
+  const createTaskHandler = (data: CreateTaskSchema) => {
     createTask(new TaskModel(data));
+    reset();
+    toast.success("Task Added!");
+  };
 
-  console.log(watch());
-  console.log(errors);
-  return { handleSubmit, control, isValid, createTaskHandler };
+  return { handleSubmit, control, isValid, createTaskHandler,isDirty };
 };
 
 export default useLogic;

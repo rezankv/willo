@@ -5,11 +5,11 @@ import { cn } from "../../../utils";
 
 const RadixDialog = DialogPrimitive.Root;
 
-const DialogTrigger = DialogPrimitive.Trigger;
+// const DialogTrigger = DialogPrimitive.Trigger;
 
 const DialogPortal = DialogPrimitive.Portal;
 
-const DialogClose = DialogPrimitive.Close;
+// const DialogClose = DialogPrimitive.Close;
 
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,

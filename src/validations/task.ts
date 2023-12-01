@@ -16,7 +16,7 @@ export const createTaskSchema = z.object({
     .max(254, "description can't be more than 254 characters"),
   isCompleted: z.boolean().optional().default(false),
   isImportant: z.boolean().optional().default(false),
-  isDeleted: z.boolean().default(false).optional(),
+  isDeleted: z.boolean().optional().default(false),
 });
 export const updateTaskSchema = z.object({
   taskId: z

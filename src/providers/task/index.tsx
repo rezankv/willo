@@ -1,20 +1,22 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import Context from "./context";
-import usePersistState from "../../hooks/usePersistState";
-import { TASKS_KEY } from "../../constants";
+// import usePersistState from "../../hooks/usePersistState";
+// import { TASKS_KEY } from "../../constants";
 import { TaskModel } from "../../models";
 
 interface Props {
   children: ReactNode;
 }
 const TaskProvider = ({ children }: Props) => {
-  const [tasks, setTasks] = usePersistState<TaskModel[]>([], TASKS_KEY);
+  // ** the data comes from local storage is not type of task
+  // const [tasks, setTasks] = usePersistState<TaskModel[]>([], TASKS_KEY);
+  const [tasks, setTasks] = useState<TaskModel[]>([]);
 
   const getTaskById = (taskId: string) =>
     tasks.find((task) => task.getId() === taskId) || new TaskModel();
 
   const createTask = (task: TaskModel) =>
-    setTasks((prevState) => ({ ...prevState, task }));
+    setTasks((prevState) => [...prevState, task]);
 
   const updateTask = (taskId: string, data: TaskModel) => {
     const selectedTask = getTaskById(taskId);

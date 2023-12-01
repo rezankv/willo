@@ -9,7 +9,8 @@ interface Props {
   onClose: () => void;
 }
 const CreateTaskDialog = ({ isOpen, onClose }: Props) => {
-  const { control, handleSubmit, createTaskHandler, isValid } = useLogic();
+  const { control, handleSubmit, isDirty, createTaskHandler, isValid } =
+    useLogic();
   return (
     <Dialog
       open={isOpen}
@@ -32,6 +33,7 @@ const CreateTaskDialog = ({ isOpen, onClose }: Props) => {
         </div>
         <div className="flex gap-1">
           <Button
+            type="submit"
             disabled={!isValid}
             onClick={handleSubmit(createTaskHandler)}
             variant={"default"}
@@ -39,7 +41,7 @@ const CreateTaskDialog = ({ isOpen, onClose }: Props) => {
             Create
           </Button>
           <Button onClick={onClose} variant={"outline"}>
-            Discard
+            {isDirty ? "Discard" : "Close"}
           </Button>
         </div>
       </form>

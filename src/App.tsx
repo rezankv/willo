@@ -1,11 +1,14 @@
-import Router from "./router";
 import TaskProvider from "./providers/task";
+import ToastProvider from "./providers/toast";
+import Router from "./router";
 
 const App = () => (
   <>
-    <TaskProvider>
-      <Router />
-    </TaskProvider>
+    <ToastProvider>
+      <TaskProvider>
+        <Router />
+      </TaskProvider>
+    </ToastProvider>
   </>
 );
 
