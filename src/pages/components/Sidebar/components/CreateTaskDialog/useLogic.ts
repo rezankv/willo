@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { CreateTaskSchema, createTaskSchema } from "../../../../../validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useTask from "../../../../../hooks/useTask";
-import { TaskModel } from "../../../../../models";
 import toast from "react-hot-toast";
 
 const useLogic = () => {
@@ -23,7 +22,7 @@ const useLogic = () => {
   const { createTask } = useTask();
 
   const createTaskHandler = (data: CreateTaskSchema) => {
-    createTask(new TaskModel(data));
+    createTask(data);
     reset();
     toast.success("Task Added!");
   };

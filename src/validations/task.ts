@@ -18,13 +18,7 @@ export const createTaskSchema = z.object({
   isImportant: z.boolean().optional().default(false),
   isDeleted: z.boolean().optional().default(false),
 });
-export const updateTaskSchema = z.object({
-  taskId: z
-    .string({ required_error: "id is required" })
-    .min(1, "title is required")
-    .uuid("id must be uuid"),
-  data: z.object(createTaskSchema.shape).partial(),
-});
+export const updateTaskSchema = z.object(createTaskSchema.shape).partial();
 
 export type CreateTaskSchema = z.infer<typeof createTaskSchema>;
 export type UpdateTaskSchema = z.infer<typeof updateTaskSchema>;

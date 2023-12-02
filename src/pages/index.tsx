@@ -4,33 +4,42 @@ import Searchbar from "./components/Searchbar";
 import TaskRow from "./components/TaskRow";
 import useLogic from "./useLogic";
 import useTask from "../hooks/useTask";
-// import Navbar from "./components/Navbar";
+import EditTaskDialog from "./components/EditTaskDialog";
 
 const RootLayout = () => {
-  const { setIsAddTaskDialogOpen, setSelectedTask } = useLogic();
+  const { isEditTaskDialogOpen, selectedTask, setSelectedTask, toggleDialog } =
+    useLogic();
 
   const { tasks } = useTask();
   return (
-    <div>
-      <div>navbar</div>
-      <div className="flex w-full">
-        <Sidebar />
-        <div className="w-full">
-          <Searchbar />
+    <>
+      <div>
+        <div>navbar</div>
+        <div className="flex w-full">
+          <Sidebar />
+          <div className="w-full">
+            <Searchbar />
 
-          {tasks.map((item) => (
-            <TaskRow
-              onClick={() => {
-                setSelectedTask(item);
-                setIsAddTaskDialogOpen(true);
-              }}
-              text={item.getTitle()}
-            />
-          ))}
+            {tasks.map((item) => (
+              <TaskRow
+                key={item.getId()}
+                onClick={() => {
+                  setSelectedTask(item);
+                  toggleDialog(true);
+                }}
+                task={item}
+              />
+            ))}
+          </div>
         </div>
+        <Outlet />
       </div>
-      <Outlet />
-    </div>
+      <EditTaskDialog
+        isOpen={isEditTaskDialogOpen}
+        onClose={() => toggleDialog(false)}
+        task={selectedTask}
+      />
+    </>
   );
 };
 
