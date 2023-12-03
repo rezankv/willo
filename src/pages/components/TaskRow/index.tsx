@@ -11,7 +11,10 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 const TaskRow = ({ task, className = "", ...props }: Props) => {
   return (
-    <CardRow className={cn("  flex justify-between ", className)} {...props}>
+    <CardRow
+      className={cn(" h-14 flex justify-between ", className)}
+      {...props}
+    >
       <div className="flex">
         <Drag className="w-4 h-4   cursor-move" />
         <Checkbox className="" />

@@ -5,9 +5,9 @@ import CardRow from "../../../components/CardRow";
 
 const Searchbar = () => {
   return (
-    <CardRow >
+    <CardRow>
       <div className="flex items-center  ">
-        <Search className="w-4 h-4" />
+        <Search />
         <Input
           placeholder="search here..."
           className="focus-visible:border-none border-none !shadow-none"
