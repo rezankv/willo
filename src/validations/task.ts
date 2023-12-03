@@ -7,7 +7,7 @@ export const createTaskSchema = z.object({
     // .min(1, "title is required")
     .uuid("id must be uuid")
     .optional()
-    .default(uuidv4()),
+    .default(() => uuidv4()),
   title: z
     .string({ required_error: "title is required" })
     .min(1, "title is required"),
