@@ -26,6 +26,7 @@ export default {
         },
         error: {
           DEFAULT: "var(--error-default)",
+          'contrast-text':"var(--error-contrast-text)"
         },
         purple: {
           DEFAULT: "var(--purple)",

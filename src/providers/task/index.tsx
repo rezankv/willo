@@ -25,6 +25,7 @@ const TaskProvider = ({ children }: Props) => {
   const createTask = (task: CreateTaskSchema) =>
     setTasks((prevState) => [...prevState, new TaskModel(task)]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateTask = (taskId: string, { id, ...rest }: UpdateTaskSchema) => {
     const selectedTask = getTaskById(taskId);
     const updatedTask = { ...selectedTask, ...rest };
@@ -32,10 +33,12 @@ const TaskProvider = ({ children }: Props) => {
   };
 
   const deleteTask = (taskId: string) => {
-    setTasks((prevState) => ({
-      ...prevState,
-      ...tasks.filter((task) => task.getId() !== taskId),
-    }));
+    const newTasks = taskModels.filter((task) => task.getId() !== taskId);
+    setTasks(newTasks);
+    // setTasks((prevState) => ({
+    //   ...prevState,
+    //   ...newTasks,
+    // }));
   };
 
   /* -------------------------------------------------------------------------- */
