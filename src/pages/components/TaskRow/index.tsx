@@ -12,18 +12,18 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 const TaskRow = ({ task, className = "", ...props }: Props) => {
   return (
     <CardRow
-      className={cn(" h-14 flex justify-between ", className)}
+      className={cn(" flex h-14 justify-between ", className)}
       {...props}
     >
       <div className="flex">
-        <Drag className="w-4 h-4   cursor-move" />
+        <Drag className="h-4 w-4   cursor-move" />
         <Checkbox className="" />
         <p className="text-sm font-light text-text">{task.getTitle()}</p>
       </div>
       <div className="flex gap-1">
         <Badge
           variant={"default"}
-          className="text-primary bg-purple-light"
+          className="bg-purple-light text-primary"
           text="sad"
         />
       </div>
