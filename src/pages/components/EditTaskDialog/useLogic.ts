@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { UpdateTaskSchema, updateTaskSchema } from "../../../validations";
 import useTask from "../../../hooks/useTask";
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { Props } from ".";
 
 interface IUseLogic {
@@ -42,11 +42,7 @@ const useLogic = ({ task }: IUseLogic) => {
   const toggleDeleteTaskDialogHandler = (state: boolean) =>
     setIsDeleteTaskDialogOpen(state);
 
-  /* -------------------------------------------------------------------------- */
-  /*                              SideEffects                                      */
-  /* -------------------------------------------------------------------------- */
-
-  useEffect(() => {
+  const initializeFormHandler = () =>
     reset({
       title: task.getTitle(),
       description: task.getDescription(),
@@ -54,7 +50,14 @@ const useLogic = ({ task }: IUseLogic) => {
       isImportant: task.getIsImportant(),
       isDeleted: task.getIsDeleted(),
     });
-  }, []);
+
+  /* -------------------------------------------------------------------------- */
+  /*                              SideEffects                                      */
+  /* -------------------------------------------------------------------------- */
+
+  useEffect(() => {
+    initializeFormHandler();
+  }, [task.getId()]);
 
   return {
     getValues,

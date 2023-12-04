@@ -10,6 +10,8 @@ import { CreateTaskSchema, UpdateTaskSchema } from "../../validations";
 interface Props {
   children: ReactNode;
 }
+
+// TODO  i thing the crud functions is not optimize
 const TaskProvider = ({ children }: Props) => {
   // ** the data comes from local storage is not type of task
   const [tasks, setTasks] = usePersistState<TaskModel[]>([], TASKS_KEY);
@@ -20,25 +22,24 @@ const TaskProvider = ({ children }: Props) => {
   /* -------------------------------------------------------------------------- */
 
   const getTaskById = (taskId: string) =>
-    tasks.find((task) => task.getId() === taskId) || new TaskModel();
+    taskModels.find((task) => task.getId() === taskId) || new TaskModel();
 
   const createTask = (task: CreateTaskSchema) =>
     setTasks((prevState) => [...prevState, new TaskModel(task)]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const updateTask = (taskId: string, { id, ...rest }: UpdateTaskSchema) => {
-    const selectedTask = getTaskById(taskId);
-    const updatedTask = { ...selectedTask, ...rest };
-    setTasks((prevState) => ({ ...prevState, updatedTask }));
-  };
+  const updateTask = (taskId: string, { id, ...rest }: UpdateTaskSchema) =>
+    setTasks((prevState) =>
+      prevState.map((task) =>
+        task.getId() === taskId
+          ? new TaskModel({ ...task, ...rest, id: taskId })
+          : task,
+      ),
+    );
 
   const deleteTask = (taskId: string) => {
     const newTasks = taskModels.filter((task) => task.getId() !== taskId);
     setTasks(newTasks);
-    // setTasks((prevState) => ({
-    //   ...prevState,
-    //   ...newTasks,
-    // }));
   };
 
   /* -------------------------------------------------------------------------- */

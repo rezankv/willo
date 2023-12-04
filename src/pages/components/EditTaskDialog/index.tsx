@@ -22,7 +22,6 @@ const EditTaskDialog = ({ task, isOpen, onClose }: Props) => {
     updateTaskHandler,
     isValid,
   } = useLogic({ task });
-
   return (
     <>
       <Dialog
@@ -50,7 +49,10 @@ const EditTaskDialog = ({ task, isOpen, onClose }: Props) => {
             <Button
               type="submit"
               disabled={!isValid}
-              onClick={handleSubmit(updateTaskHandler(task.getId()))}
+              onClick={()=>{
+                handleSubmit(updateTaskHandler(task.getId()))()
+                onClose()
+              }}
               variant={"default"}
             >
               Update

@@ -2,7 +2,7 @@
 
 interface ITask {
   id?: string;
-  title: string;
+  title?: string;
   // tags?: TagEnum[];
   description?: string;
   isImportant?: boolean;
