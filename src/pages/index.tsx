@@ -6,6 +6,7 @@ import useLogic from "./useLogic";
 import useTask from "../hooks/useTask";
 import EditTaskDialog from "./components/EditTaskDialog";
 import Context from "./context";
+import { ScrollArea } from "../components";
 
 const RootLayout = () => {
   const {
@@ -21,11 +22,11 @@ const RootLayout = () => {
   return (
     <Context.Provider value={{ setIsSidebarOpen, isSidebarOpen }}>
       <div className="bg-background">
-        <div>navbar</div>
         <div className="flex w-full">
           <Sidebar />
           <div className="relative w-full ">
             <Searchbar />
+            <ScrollArea  className="w-full h-[30rem] rounded-md border p-4" >
             {tasks.map((item) => (
               <TaskRow
                 key={item.getId()}
@@ -36,6 +37,7 @@ const RootLayout = () => {
                 task={item}
               />
             ))}
+            </ScrollArea>
           </div>
         </div>
         <Outlet />

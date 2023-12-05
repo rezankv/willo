@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        "navbar": "0 4px 24px 0 rgba(34,41,47,.1)",
+        navbar: "0 4px 24px 0 rgba(34,41,47,.1)",
       },
       colors: {
         background: {
@@ -19,6 +19,7 @@ export default {
         primary: {
           DEFAULT: "var(--primary-default)",
           "contrast-text": "var(--primary-contrast-text)",
+          light: "var(--primary-light)",
         },
         text: {
           DEFAULT: "var(--text-default)",
@@ -26,7 +27,7 @@ export default {
         },
         error: {
           DEFAULT: "var(--error-default)",
-          'contrast-text':"var(--error-contrast-text)"
+          "contrast-text": "var(--error-contrast-text)",
         },
         purple: {
           DEFAULT: "var(--purple)",

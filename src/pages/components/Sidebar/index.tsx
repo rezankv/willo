@@ -25,7 +25,7 @@ const Sidebar = () => {
         <aside className={`fixed md:relative z-${zIndex.sidebar}  flex`}>
           <div
             className={cn(
-              " h-screen w-60 overflow-y-auto border-l border-r bg-background-paper px-5 py-8 sm:w-64 ",
+              "  w-60 overflow-y-auto border-l border-r bg-background-paper px-5 py-8 sm:w-64 ",
               !isSidebarOpen ? "hidden" : "",
             )}
           >
