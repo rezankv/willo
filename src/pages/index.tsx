@@ -13,11 +13,11 @@ const RootLayout = () => {
   const { tasks } = useTask();
   return (
     <>
-      <div>
+      <div className="bg-background">
         <div>navbar</div>
         <div className="flex w-full">
           <Sidebar />
-          <div className="w-full">
+          <div className="w-full ">
             <Searchbar />
 
             {tasks.map((item) => (

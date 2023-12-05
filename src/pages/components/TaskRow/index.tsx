@@ -12,7 +12,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 const TaskRow = ({ task, className = "", ...props }: Props) => {
   return (
     <CardRow
-      className={cn(" flex h-14 justify-between ", className)}
+      className={cn(" flex h-14 justify-between transform hover:-translate-y-1 transition", className)}
       {...props}
     >
       <div className="flex">
