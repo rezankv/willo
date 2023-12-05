@@ -9,7 +9,7 @@ const useLogic = () => {
 
   const toggleDialog = (state: boolean) => setIsCreateTaskDialogOpen(state);
 
-  
+
   return { isCreateTaskDialogOpen, toggleDialog };
 };
 

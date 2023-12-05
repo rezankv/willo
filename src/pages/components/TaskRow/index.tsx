@@ -12,12 +12,15 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 const TaskRow = ({ task, className = "", ...props }: Props) => {
   return (
     <CardRow
-      className={cn(" flex h-14 justify-between transform hover:-translate-y-1 transition", className)}
+      className={cn(
+        "group flex  h-14 transform items-center justify-between px-3 transition hover:-translate-y-1 hover:" ,
+        className,
+      )}
       {...props}
     >
-      <div className="flex">
-        <Drag className="h-4 w-4   cursor-move" />
-        <Checkbox className="" />
+      <div className="flex gap-2">
+        <Drag className="group-hover:opacity-100 opacity-0  h-4 w-4 cursor-move fill-text-mutated" />
+        <Checkbox />
         <p className="text-sm font-light text-text">{task.getTitle()}</p>
       </div>
       <div className="flex gap-1">

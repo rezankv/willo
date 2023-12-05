@@ -7,7 +7,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 const CardRow = ({ children, ...props }: Props) => {
   return (
     <Card
-      className="h-14 px-3  flex w-full  justify-between  border-x-0 rounded-none  py-1 items-center"
+      className="h-14 px-3  flex w-full    border-x-0 rounded-none  py-1 items-center"
       {...props}
     >
       {children}
