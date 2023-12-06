@@ -15,7 +15,7 @@ export const BackDrop = ({
   <>
     <div
       className={cn(
-        `" bg-background/80 fixed inset-0 h-screen   w-screen z-${zIndex.backDrop} " backdrop-blur-sm`,
+        `" bg-background/80 fixed inset-0 h-screen   w-screen z-backDrop " backdrop-blur-sm`,
         !isShow ? "hidden" : "",
         className,
       )}

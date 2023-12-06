@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      zIndex: {
+        backDrop: "100",
+        sidebar: "110",
+      },
       boxShadow: {
         navbar: "0 4px 24px 0 rgba(34,41,47,.1)",
       },

@@ -14,7 +14,6 @@ import { zIndex } from "../../../constants";
 const Sidebar = () => {
   const { isCreateTaskDialogOpen, toggleDialog } = useLogic();
   const { isSidebarOpen, setIsSidebarOpen } = useContext(LayoutContext);
-
   return (
     <>
       <BackDrop
@@ -22,11 +21,15 @@ const Sidebar = () => {
         isShow={isSidebarOpen}
         className="md:hidden"
       >
-        <aside className={`fixed md:relative z-${zIndex.sidebar}  flex`}>
+        <aside
+          className={cn(
+            `z-sidebar fixed flex -translate-x-full transform transition-all md:relative `,
+            isSidebarOpen ? "translate-x-0" : "",
+          )}
+        >
           <div
             className={cn(
               "  w-60 overflow-y-auto border-l border-r bg-background-paper px-5 py-8 sm:w-64 ",
-              !isSidebarOpen ? "hidden" : "",
             )}
           >
             <div className="relative ">
