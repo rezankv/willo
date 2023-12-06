@@ -12,6 +12,7 @@ const MyTaskPage = lazy(() => import("../pages/myTask"));
 const DeletedPage = lazy(() => import("../pages/deleted"));
 const ImportantPage = lazy(() => import("../pages/important"));
 const CompletedPage = lazy(() => import("../pages/completed"));
+const NotfoundPage = lazy(() => import("../pages/404"));
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
         element: <MyTaskPage />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotfoundPage />,
   },
 ]);
 

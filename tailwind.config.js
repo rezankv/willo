@@ -24,6 +24,7 @@ export default {
         text: {
           DEFAULT: "var(--text-default)",
           mutated: "var(--text-mutated)",
+          light: "var(--text-light)",
         },
         error: {
           DEFAULT: "var(--error-default)",
