@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { CreateTaskSchema, createTaskSchema } from "../../../../../validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useTask from "../../../../../hooks/useTask";
 import toast from "react-hot-toast";
+import { useStorage } from "../../../../../hooks";
 
 const useLogic = () => {
   const {
@@ -19,10 +19,10 @@ const useLogic = () => {
     },
   });
 
-  const { createTask } = useTask();
+  const { createTask } = useStorage();
 
   const createTaskHandler = (data: CreateTaskSchema) => {
-    createTask(data);
+    createTask(data)
     reset();
     toast.success("Task Added!");
   };

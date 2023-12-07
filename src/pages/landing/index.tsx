@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import Navbar from "./Navbar";
 import GradientWrapper from "./GradiantSection";
 import { Button } from "../../components";

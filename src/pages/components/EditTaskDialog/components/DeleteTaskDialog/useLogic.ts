@@ -1,18 +1,18 @@
 import toast from "react-hot-toast";
-import useTask from "../../../../../hooks/useTask";
 import { TaskModel } from "../../../../../models";
+import { useStorage } from "../../../../../hooks";
 
 const useLogic = () => {
-  const { deleteTask } = useTask();
+  const { deleteTask } = useStorage();
+
   /* -------------------------------------------------------------------------- */
   /*                              Handlers                                      */
   /* -------------------------------------------------------------------------- */
 
   const deleteTaskHandler = (task: TaskModel) => {
-    deleteTask(task.getId())
-    toast.success('Task deleted Successfully!')
-
-  }
+    deleteTask(task.getId());
+    toast.success("Task deleted Successfully!");
+  };
 
   return { deleteTaskHandler };
 };

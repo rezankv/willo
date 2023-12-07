@@ -9,7 +9,6 @@ import useLogic from "./useLogic";
 import { cn } from "../../../utils";
 import { useContext } from "react";
 import LayoutContext from "../../context";
-import { zIndex } from "../../../constants";
 
 const Sidebar = () => {
   const { isCreateTaskDialogOpen, toggleDialog } = useLogic();
@@ -23,7 +22,7 @@ const Sidebar = () => {
       >
         <aside
           className={cn(
-            `z-sidebar fixed flex -translate-x-full transform transition-all md:relative `,
+            `fixed z-sidebar flex -translate-x-full transform transition-all md:relative `,
             isSidebarOpen ? "translate-x-0" : "",
           )}
         >

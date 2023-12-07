@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Searchbar from "./components/Searchbar";
-import TaskRow from "./components/TaskRow";
 import useLogic from "./useLogic";
-import useTask from "../hooks/useTask";
 import EditTaskDialog from "./components/EditTaskDialog";
 import Context from "./context";
 import { ScrollArea } from "../components";
+import { useStorage } from "../hooks";
+import TaskRow from "./components/TaskRow";
 
 const RootLayout = () => {
   const {
@@ -18,7 +18,8 @@ const RootLayout = () => {
     toggleDialog,
   } = useLogic();
 
-  const { tasks } = useTask();
+  const { getTasks} = useStorage();
+  
   return (
     <Context.Provider value={{ setIsSidebarOpen, isSidebarOpen }}>
       <div className="bg-background">
@@ -27,7 +28,7 @@ const RootLayout = () => {
           <div className="relative w-full ">
             <Searchbar />
             <ScrollArea  className="w-full h-[30rem] rounded-md border p-4" >
-            {tasks.map((item) => (
+            {getTasks().map((item) => (
               <TaskRow
                 key={item.getId()}
                 onClick={() => {

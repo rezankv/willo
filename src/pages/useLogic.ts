@@ -3,7 +3,7 @@ import { TaskModel } from "../models";
 
 const useLogic = () => {
   const [isEditTaskDialogOpen, setIsEditTaskDialogOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedTask, setSelectedTask] = useState(new TaskModel());
 
   /* -------------------------------------------------------------------------- */

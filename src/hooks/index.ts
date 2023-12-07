@@ -1,2 +1,1 @@
-export * from './usePersistState'
-export * from './useTask'
+export * from './useStorage'

@@ -12,7 +12,6 @@ export interface Props {
 const DeleteTaskDialog = ({ task, isOpen, onClose,onDelete }: Props) => {
   const { deleteTaskHandler } = useLogic();
 
-  console.log(task);
   return (
     <Dialog
       open={isOpen}

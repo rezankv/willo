@@ -2,15 +2,16 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { UpdateTaskSchema, updateTaskSchema } from "../../../validations";
-import useTask from "../../../hooks/useTask";
 import {  useEffect, useState } from "react";
 import { Props } from ".";
+import { useStorage } from "../../../hooks";
 
 interface IUseLogic {
   task: Props["task"];
 }
 const useLogic = ({ task }: IUseLogic) => {
-  const { updateTask } = useTask();
+
+const {updateTask} = useStorage()
 
   const {
     control,
@@ -33,6 +34,7 @@ const useLogic = ({ task }: IUseLogic) => {
   /*                              Handlers                                      */
   /* -------------------------------------------------------------------------- */
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateTaskHandler = (taskId: string) => (data: UpdateTaskSchema) => {
     updateTask(taskId, data);
     reset();

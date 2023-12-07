@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { cn } from "../../../utils";
-import { zIndex } from "../../../constants";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -15,7 +14,7 @@ export const BackDrop = ({
   <>
     <div
       className={cn(
-        `" bg-background/80 fixed inset-0 h-screen   w-screen z-backDrop " backdrop-blur-sm`,
+        `" bg-background/80 fixed inset-0 h-screen   w-screen z-sidebar-backDrop " backdrop-blur-sm`,
         !isShow ? "hidden" : "",
         className,
       )}
