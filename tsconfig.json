@@ -1,5 +1,18 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components": ["src/libs/components/index.ts"],
+      "@constants": ["src/libs/constants/index.ts"],
+      "@enums": ["src/libs/enums/index.ts"],
+      "@hooks": ["src/libs/hooks/index.ts"],
+      "@models": ["src/libs/models/index.ts"],
+      "@providers": ["src/libs/providers/index.ts"],
+      "@utils": ["src/libs/utils/index.ts"],
+      "@assets/icons": ["src/libs/assets/icons/index.ts"],
+      "@validations": ["src/libs/validations/index.ts"],
+      "@pages/*": ["src/pages/*"],
+    },
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],

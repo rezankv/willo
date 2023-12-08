@@ -1,23 +1,22 @@
-import Calendar from "../../assets/icons/calendar.svg?react";
-import Board from "../../assets/icons/board.svg?react";
-import Task from "../../assets/icons/task.svg?react";
+// ** assets
+import { CalendarIcon, BoardIcon, TaskIcon } from "@assets/icons";
 
 const NotFound = () => {
   const navigations = [
     {
-      icon: <Task />,
+      icon: <TaskIcon />,
       title: "Tasks",
       desc: "Lorem Ipsum is simply dummy text of the printing",
       href: "",
     },
     {
-      icon: <Calendar />,
+      icon: <CalendarIcon />,
       title: "Calendar",
       desc: "Lorem Ipsum is simply dummy text of the printing",
       href: "",
     },
     {
-      icon: <Board />,
+      icon: <BoardIcon />,
       title: "Board",
       desc: "Lorem Ipsum is simply dummy text of the printing",
       href: "",

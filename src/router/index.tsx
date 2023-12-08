@@ -1,51 +1,55 @@
 import { Suspense, lazy } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import {
-  COMPLETED_ROUTE,
-  DELETED_ROUTE,
-  IMPORTANT_ROUTE,
-  MY_TASK_ROUTE,
-} from "../constants";
-import RootLayout from "../pages";
 
-const MyTaskPage = lazy(() => import("../pages/myTask"));
-const DeletedPage = lazy(() => import("../pages/deleted"));
-const ImportantPage = lazy(() => import("../pages/important"));
-const CompletedPage = lazy(() => import("../pages/completed"));
-const NotfoundPage = lazy(() => import("../pages/404"));
-const Landing = lazy(() => import("../pages/landing"));
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
+
+// ** constants
+import {
+  APP_BOARD_ROUTE,
+  APP_CALENDAR_ROUTE,
+  APP_CHECKLIST_ROUTE,
+  APP_ROUTE,
+  LANDING_ROUTE,
+} from "@constants";
+
+const NotfoundPage = lazy(() => import("@pages/404"));
+const LandingPage = lazy(() => import("@pages/."));
+const AppLayout = lazy(() => import("@pages/app"));
+const CheckListPage = lazy(() => import("@pages/app/checkList"));
+const BoardPage = lazy(() => import("@pages/app/board"));
+const CalendarPage = lazy(() => import("@pages/app/calendar"));
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <RootLayout />,
+    path: LANDING_ROUTE,
+    element: <LandingPage />,
+  },
+  {
+    path: APP_ROUTE,
+    element: <AppLayout />,
     children: [
       {
-        path: MY_TASK_ROUTE,
-        element: <MyTaskPage />,
+        path: APP_CHECKLIST_ROUTE,
+        element: <CheckListPage />,
       },
       {
-        path: COMPLETED_ROUTE,
-        element: <CompletedPage />,
+        path: APP_BOARD_ROUTE,
+        element: <BoardPage />,
       },
       {
-        path: DELETED_ROUTE,
-        element: <DeletedPage />,
+        path: APP_CALENDAR_ROUTE,
+        element: <CalendarPage />,
       },
       {
-        path: IMPORTANT_ROUTE,
-        element: <ImportantPage />,
-      },
-      {
-        path: "/",
-        element: <MyTaskPage />,
+        path: APP_ROUTE,
+        element: <Navigate to={APP_CHECKLIST_ROUTE} />,
       },
     ],
   },
-  {
-    path: "/landing",
-    element: <Landing />,
-  },
+
   {
     path: "*",
     element: <NotfoundPage />,

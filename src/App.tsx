@@ -1,10 +1,12 @@
-import ToastProvider from "./providers/toast";
 import Router from "./router";
+
+// ** providers
+import { ToastProvider } from "@providers";
 
 const App = () => (
   <>
     <ToastProvider>
-        <Router />
+      <Router />
     </ToastProvider>
   </>
 );

@@ -1,0 +1,16 @@
+export { default as BoardIcon } from "./board.svg?react";
+export { default as LogoIcon } from "./logo.svg?react";
+export { default as CalendarIcon } from "./calendar.svg?react";
+export { default as CheckIcon } from "./check.svg?react";
+export { default as CircleIcon } from "./circle.svg?react";
+export { default as DragIcon } from "./drag.svg?react";
+export { default as GithubIcon } from "./github.svg?react";
+export { default as HamburgerIcon } from "./hamburger-menu.svg?react";
+export { default as MailIcon } from "./mail.svg?react";
+export { default as MenuIcon } from "./menu.svg?react";
+export { default as PlusIcon } from "./plus.svg?react";
+export { default as RightArrowIcon } from "./right-arrow.svg?react";
+export { default as SearchIcon } from "./search.svg?react";
+export { default as StarIcon } from "./star.svg?react";
+export { default as TaskIcon } from "./task.svg?react";
+export { default as TrashIcon } from "./trash.svg?react";
