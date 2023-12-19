@@ -15,6 +15,9 @@ import {
   LANDING_ROUTE,
 } from "@constants";
 
+// ** components
+import { LoadingPage } from "@components";
+
 const NotfoundPage = lazy(() => import("@pages/404"));
 const LandingPage = lazy(() => import("@pages/."));
 const AppLayout = lazy(() => import("@pages/app"));
@@ -58,7 +61,7 @@ const router = createBrowserRouter([
 
 const Router = () => {
   return (
-    <Suspense fallback={<h1>Loading...</h1>}>
+    <Suspense fallback={<LoadingPage />}>
       <RouterProvider router={router} />
     </Suspense>
   );

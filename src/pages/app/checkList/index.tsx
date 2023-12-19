@@ -1,5 +1,5 @@
 // ** components
-import { ScrollArea } from "@components";
+import {  ScrollArea } from "@components";
 
 // ** hooks
 import { useStorage } from "@hooks";
