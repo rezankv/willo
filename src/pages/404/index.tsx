@@ -1,25 +1,34 @@
+import { Link } from "react-router-dom";
+
 // ** assets
 import { CalendarIcon, BoardIcon, TaskIcon } from "@assets/icons";
+
+// ** constants
+import {
+  APP_BOARD_ROUTE,
+  APP_CALENDAR_ROUTE,
+  APP_CHECKLIST_ROUTE,
+} from "@constants";
 
 const NotFound = () => {
   const navigations = [
     {
       icon: <TaskIcon />,
       title: "Tasks",
-      desc: "Lorem Ipsum is simply dummy text of the printing",
-      href: "",
+      desc: "Manage your daily tasks here",
+      href: APP_CHECKLIST_ROUTE,
     },
     {
       icon: <CalendarIcon />,
       title: "Calendar",
-      desc: "Lorem Ipsum is simply dummy text of the printing",
-      href: "",
+      desc: "Discover you event and appointments",
+      href: APP_CALENDAR_ROUTE,
     },
     {
       icon: <BoardIcon />,
       title: "Board",
       desc: "Lorem Ipsum is simply dummy text of the printing",
-      href: "",
+      href: APP_BOARD_ROUTE,
     },
   ];
 
@@ -47,11 +56,11 @@ const NotFound = () => {
                   <div className="space-y-1">
                     <h4 className="font-medium text-gray-800">{item.title}</h4>
                     <p>{item.desc}</p>
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href}
                       className="inline-flex items-center gap-x-1 text-sm font-medium text-indigo-600 duration-150 hover:text-indigo-400"
                     >
-                      Learn more
+                      Let's go
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
@@ -64,7 +73,7 @@ const NotFound = () => {
                           clipRule="evenodd"
                         />
                       </svg>
-                    </a>
+                    </Link>
                   </div>
                 </li>
               ))}
