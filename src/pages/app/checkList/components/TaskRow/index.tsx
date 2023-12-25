@@ -25,7 +25,7 @@ const TaskRow = ({ task, className = "", ...props }: Props) => {
       {...props}
     >
       <div className="flex gap-2">
-        <Drag className="h-4 w-4  cursor-move fill-text-mutated opacity-0 group-hover:opacity-100" />
+        <Drag className="h-4 w-4  cursor-move fill-text-mutated  group-hover:opacity-100 lg:opacity-0" />
         <Checkbox />
         <p className="text-sm font-light text-text">{task.getTitle()}</p>
       </div>
