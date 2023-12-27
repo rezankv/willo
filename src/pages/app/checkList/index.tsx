@@ -1,5 +1,5 @@
 // ** components
-import {  ScrollArea } from "@components";
+import { Head, ScrollArea } from "@components";
 
 // ** hooks
 import { useStorage } from "@hooks";
@@ -25,34 +25,37 @@ const RootLayout = () => {
   const { getTasks } = useStorage();
 
   return (
-    <Context.Provider value={{ setIsSidebarOpen, isSidebarOpen }}>
-      <div className="bg-background">
-        <div className="flex w-full">
-          <Sidebar />
-          <div className="relative w-full ">
-            <Searchbar />
-            <ScrollArea className="h-[30rem] w-full rounded-md border p-4">
-              {getTasks().map((item) => (
-                <TaskRow
-                  key={item.getId()}
-                  onClick={() => {
-                    setSelectedTask(item);
-                    toggleDialog(true);
-                  }}
-                  task={item}
-                />
-              ))}
-            </ScrollArea>
+    <>
+      <Head title="Willo | Checklist"/>
+      <Context.Provider value={{ setIsSidebarOpen, isSidebarOpen }}>
+        <div className="bg-background">
+          <div className="flex w-full">
+            <Sidebar />
+            <div className="relative w-full ">
+              <Searchbar />
+              <ScrollArea className="h-[30rem] w-full rounded-md border p-4">
+                {getTasks().map((item) => (
+                  <TaskRow
+                    key={item.getId()}
+                    onClick={() => {
+                      setSelectedTask(item);
+                      toggleDialog(true);
+                    }}
+                    task={item}
+                  />
+                ))}
+              </ScrollArea>
+            </div>
           </div>
+          {/* <Outlet /> */}
         </div>
-        {/* <Outlet /> */}
-      </div>
-      <EditTaskDialog
-        isOpen={isEditTaskDialogOpen}
-        onClose={() => toggleDialog(false)}
-        task={selectedTask}
-      />
-    </Context.Provider>
+        <EditTaskDialog
+          isOpen={isEditTaskDialogOpen}
+          onClose={() => toggleDialog(false)}
+          task={selectedTask}
+        />
+      </Context.Provider>
+    </>
   );
 };
 
