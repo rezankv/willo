@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  useEffect, useState } from "react";
+import {  useEffect } from "react";
 import toast from "react-hot-toast";
 
 // ** validations
@@ -34,7 +34,6 @@ const {updateTask} = useStorage()
     },
   });
 
-  const [isDeleteTaskDialogOpen, setIsDeleteTaskDialogOpen] = useState(false);
 
   /* -------------------------------------------------------------------------- */
   /*                              Handlers                                      */
@@ -46,8 +45,6 @@ const {updateTask} = useStorage()
     toast.success("Task Updated!");
   };
 
-  const toggleDeleteTaskDialogHandler = (state: boolean) =>
-    setIsDeleteTaskDialogOpen(state);
 
   const initializeFormHandler = () =>
     reset({
@@ -73,8 +70,6 @@ const {updateTask} = useStorage()
     isValid,
     updateTaskHandler,
     isDirty,
-    toggleDeleteTaskDialogHandler,
-    isDeleteTaskDialogOpen,
   };
 };
 

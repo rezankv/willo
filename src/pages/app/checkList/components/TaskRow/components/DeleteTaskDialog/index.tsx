@@ -1,5 +1,5 @@
 // ** components
-import { Button,Dialog } from "@components";
+import { Button, Dialog } from "@components";
 
 // ** models
 import { TaskModel } from "@models";
@@ -10,10 +10,9 @@ import useLogic from "./useLogic";
 export interface Props {
   isOpen: boolean;
   onClose: () => void;
-  onDelete: () => void;
   task: TaskModel;
 }
-const DeleteTaskDialog = ({ task, isOpen, onClose, onDelete }: Props) => {
+const DeleteTaskDialog = ({ task, isOpen, onClose }: Props) => {
   const { deleteTaskHandler } = useLogic();
 
   return (
@@ -30,7 +29,6 @@ const DeleteTaskDialog = ({ task, isOpen, onClose, onDelete }: Props) => {
             onClick={() => {
               deleteTaskHandler(task);
               onClose();
-              onDelete();
             }}
             variant={"destructive"}
           >
