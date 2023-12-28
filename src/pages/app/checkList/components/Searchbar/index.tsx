@@ -22,7 +22,7 @@ const Searchbar = () => {
         onClick={() => {
           setIsSidebarOpen((prevState) => !prevState);
         }}
-        className="text-text md:hidden"
+        className="text-text md:hidden cursor-pointer"
       />
       <div className=" ml-2 flex flex-grow items-center">
         {searchedValue ? (

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // ** components
 import { BackDrop, Button } from "@components";
@@ -25,6 +25,7 @@ import {
   APP_CHECKLIST_IMPORTANT_TASKS_ROUTE,
   APP_CHECKLIST_TAGS_HIGH_ROUTE,
   APP_CHECKLIST_TAGS_LOW_ROUTE,
+  APP_CHECKLIST_TAGS_MEDIUM_ROUTE,
 } from "@constants";
 
 // ** locals
@@ -33,6 +34,8 @@ import useLogic from "./useLogic";
 import LayoutContext from "../../context";
 
 const Sidebar = () => {
+  const { pathname } = useLocation();
+
   const { isCreateTaskDialogOpen, toggleDialog } = useLogic();
   const { isSidebarOpen, setIsSidebarOpen } = useContext(LayoutContext);
 
@@ -67,7 +70,7 @@ const Sidebar = () => {
       },
       {
         label: "Medium",
-        path: APP_CHECKLIST_TAGS_LOW_ROUTE,
+        path: APP_CHECKLIST_TAGS_MEDIUM_ROUTE,
         icon: <span className="h-2 w-2 rounded-full bg-orange"></span>,
       },
       {
@@ -102,11 +105,14 @@ const Sidebar = () => {
             </div>
 
             <nav className="-mx-3 mt-4">
-              <div className="space-y-3">
+              <div className="space-y-6">
                 {sidebarItems.primaries.map(({ path, icon, label }) => (
                   <Link
                     key={uuidv4()}
-                    className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300   hover:bg-gray-100     hover:text-gray-700"
+                    className={cn(
+                      "flex transform items-center  px-1 text-gray-600 transition-colors duration-300   hover:text-primary",
+                      pathname === path ? "text-primary  border-primary border-l-2	" : "",
+                    )}
                     to={path}
                   >
                     {icon}
@@ -125,17 +131,17 @@ const Sidebar = () => {
                 <div className="space-y-3">
                   {sidebarItems.tags.map(({ icon, label, path }) => (
                     <Link
+                      key={uuidv4()}
                       to={path}
-                      className="flex transform items-center gap-3 rounded-lg px-3 py-1 text-sm text-gray-600 transition-colors duration-300  "
+                      className={cn(
+                        "flex transform items-center gap-3 rounded-lg px-3 py-1 text-sm text-gray-600 transition-colors duration-300  ",
+                        pathname === path ? "text-primary" : "",
+                      )}
                     >
                       {icon}
                       {label}
                     </Link>
                   ))}
-                  
-                
-                  
-               
                 </div>
               </div>
             </nav>
