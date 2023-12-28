@@ -7,12 +7,6 @@ import { Dialog, Input, Button, Textarea } from "@components";
 // ** models
 import { TaskModel } from "@models";
 
-// ** assets
-import { TrashIcon } from "@assets/icons";
-
-// ** locals
-import DeleteTaskDialog from "./components/DeleteTaskDialog";
-
 export interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -20,9 +14,7 @@ export interface Props {
 }
 const EditTaskDialog = ({ task, isOpen, onClose }: Props) => {
   const {
-    isDeleteTaskDialogOpen,
     control,
-    toggleDeleteTaskDialogHandler,
     handleSubmit,
     isDirty,
     updateTaskHandler,
@@ -51,36 +43,27 @@ const EditTaskDialog = ({ task, isOpen, onClose }: Props) => {
               )}
             />
           </div>
-          <div className="flex gap-1">
-            <Button
-              type="submit"
-              disabled={!isValid}
-              onClick={() => {
-                handleSubmit(updateTaskHandler(task.getId()))();
-                onClose();
-              }}
-              variant={"default"}
-            >
-              Update
-            </Button>
-            <Button onClick={onClose} variant={"outline"}>
-              {isDirty ? "Discard" : "Close"}
-            </Button>
-
-            <TrashIcon
-              className="hover:text-error"
-              onClick={() => toggleDeleteTaskDialogHandler(true)}
-            />
+          <div className="flex justify-between  items-center">
+            <div className="flex gap-1">
+              <Button
+                type="submit"
+                disabled={!isValid}
+                onClick={() => {
+                  handleSubmit(updateTaskHandler(task.getId()))();
+                  onClose();
+                }}
+                variant={"default"}
+              >
+                Update
+              </Button>
+              <Button onClick={onClose} variant={"outline"}>
+                {isDirty ? "Discard" : "Close"}
+              </Button>
+            </div>
           </div>
         </form>
       </Dialog>
 
-      <DeleteTaskDialog
-        task={task}
-        isOpen={isDeleteTaskDialogOpen}
-        onClose={() => toggleDeleteTaskDialogHandler(false)}
-        onDelete={onClose}
-      />
     </>
   );
 };
