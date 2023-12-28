@@ -6,12 +6,13 @@ import { Button } from "@components";
 // ** assets
 import { GithubIcon, RightArrowIcon2 } from "@assets/icons";
 
-// ** locals
-import Navbar from "../pages/components/Navbar";
-import GradientWrapper from "../pages/components/GradiantSection";
-
 // ** constants
 import { APP_ROUTE, willo_github_url } from "@constants";
+
+// ** locals
+import Navbar from "./components/Navbar";
+import GradientWrapper from "./components/GradiantSection";
+
 
 const LandingPage = () => (
   <>
