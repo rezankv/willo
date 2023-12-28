@@ -13,11 +13,12 @@ import { CreateTaskSchema, UpdateTaskSchema } from "@validations";
 
 interface TaskSlice {
   tasks: TaskModel[];
-  getTasks: (page?: number, limit?: number) => TaskModel[];
+  getTasks: (taskTitle?: string, page?: number, limit?: number) => TaskModel[];
   createTask: (data: CreateTaskSchema) => void;
   updateTask: (taskId: string, data: UpdateTaskSchema) => void;
   getTaskById: (taskId: string) => void;
   deleteTask: (taskId: string) => void;
+  sortTasks: (type: "A-Z" | "Z-A") => void;
 }
 
 // ** addItem: (newItem) => set((state) => ({ items: [...state.items, newItem] })),
@@ -29,10 +30,12 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
   // ! if you need the 'tasks' list in components use 'getTasks' function
   tasks: [] as TaskModel[],
 
-  getTasks: (page = 1, limit = 10) => {
+  getTasks: (taskTitle = "", page = 1, limit = 10) => {
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
-    const tasks = get().tasks.slice(startIndex, endIndex);
+    const tasks = get()
+      .tasks.filter((task) => task.props?.title?.includes(taskTitle))
+      .slice(startIndex, endIndex);
     const taskModels = tasks.map((task) => new TaskModel(task.props));
     return taskModels;
   },
@@ -57,6 +60,13 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
     set(({ tasks }) => ({
       tasks: tasks.filter((task) => task.props?.id !== taskId),
     })),
+
+  sortTasks: (type) => {
+    const tasks = get().tasks.sort(
+      (a, b) => a.props?.title?.localeCompare(b.props?.title),
+    );
+    type === "A-Z" ? set({ tasks }) : set({ tasks: tasks.reverse() });
+  },
 });
 
 /* -------------------------------------------------------------------------- */

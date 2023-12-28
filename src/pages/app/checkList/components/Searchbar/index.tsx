@@ -1,16 +1,21 @@
 import { useContext } from "react";
 
 // ** assets
-import { HamburgerIcon, SearchIcon } from "@assets/icons";
+import { CloseIcon, HamburgerIcon, SearchIcon } from "@assets/icons";
 
 // ** components
 import { Menu, CardRow, Input } from "@components";
+
+// ** hooks
+import { useStorage } from "@hooks";
 
 // ** locals
 import LayoutContext from "../../context";
 
 const Searchbar = () => {
-  const { setIsSidebarOpen } = useContext(LayoutContext);
+  const { setIsSidebarOpen, setSearchedValue, searchedValue } =
+    useContext(LayoutContext);
+  const { sortTasks } = useStorage();
   return (
     <CardRow className="flex h-14 items-center px-2">
       <HamburgerIcon
@@ -20,18 +25,28 @@ const Searchbar = () => {
         className="text-text md:hidden"
       />
       <div className=" ml-2 flex flex-grow items-center">
-        <SearchIcon />
+        {searchedValue ? (
+          <CloseIcon
+            className=" h-5 w-5 cursor-pointer"
+            onClick={() => setSearchedValue("")}
+          />
+        ) : (
+          <SearchIcon className="h-4 w-4" />
+        )}
         <Input
+          onChange={(e) => setSearchedValue(e.target.value || "")}
           placeholder="search here..."
-          className=" w-full border-none font-light !shadow-none focus-visible:ring-transparent"
+          className="  w-full border-none font-light !shadow-none focus-visible:ring-transparent"
+          value={searchedValue}
         />
       </div>
       <Menu
         items={[
-          { label: "Sort A-Z", callback: () => {} },
-          { label: "Sort Z-A", callback: () => {} },
-          { label: "Sort Due Date", callback: () => {} },
-          { label: "Reset Sort", callback: () => {} },
+          {
+            label: "Sort A-Z",
+            callback: () => sortTasks("A-Z"),
+          },
+          { label: "Sort Z-A", callback: () => sortTasks("Z-A") },
         ]}
       />
     </CardRow>

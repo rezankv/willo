@@ -15,3 +15,4 @@ export { default as StarIcon } from "./star.svg?react";
 export { default as TaskIcon } from "./task.svg?react";
 export { default as TrashIcon } from "./trash.svg?react";
 export { default as RightArrowIcon2 } from "./right-arrow-2.svg?react";
+export { default as CloseIcon } from "./close.svg?react";

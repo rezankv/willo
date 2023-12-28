@@ -196,14 +196,13 @@ export const Menu = ({ items }: Props) => {
       <DropdownMenuContent className="w-56 bg-background-paper">
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
           {items.map((item, index) => (
-            <DropdownMenuRadioItem
+            <DropdownMenuItem
               className="hover:bg-primary-light  "
               onClick={item.callback}
               key={`${index}-${item.label}`}
-              value={item.label}
             >
               {item.label}
-            </DropdownMenuRadioItem>
+            </DropdownMenuItem>
           ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>

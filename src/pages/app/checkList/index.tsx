@@ -15,7 +15,7 @@ import EditTaskDialog from "./components/EditTaskDialog";
 import Context from "./context";
 import TaskRow from "./components/TaskRow";
 
-const RootLayout = () => {
+const ChecklistPage = () => {
   const {
     isSidebarOpen,
     setIsSidebarOpen,
@@ -23,6 +23,8 @@ const RootLayout = () => {
     selectedTask,
     setSelectedTask,
     toggleDialog,
+    searchedValue,
+    setSearchedValue,
   } = useLogic();
 
   const { getTasks } = useStorage();
@@ -44,17 +46,25 @@ const RootLayout = () => {
         />
       ))
     );
+
   return (
     <>
       <Head title="Willo | Checklist" />
-      <Context.Provider value={{ setIsSidebarOpen, isSidebarOpen }}>
+      <Context.Provider
+        value={{
+          searchedValue,
+          setSearchedValue,
+          setIsSidebarOpen,
+          isSidebarOpen,
+        }}
+      >
         <div className="bg-background">
           <div className="flex w-full">
             <Sidebar />
             <div className="relative w-full ">
               <Searchbar />
               <ScrollArea className="h-[30rem] w-full rounded-md border ">
-                {renderTaskRows(getTasks())}
+                {renderTaskRows(getTasks(searchedValue))}
               </ScrollArea>
             </div>
           </div>
@@ -70,4 +80,4 @@ const RootLayout = () => {
   );
 };
 
-export default RootLayout;
+export default ChecklistPage;

@@ -7,6 +7,7 @@ const useLogic = () => {
   const [isEditTaskDialogOpen, setIsEditTaskDialogOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedTask, setSelectedTask] = useState(new TaskModel());
+  const [searchedValue, setSearchedValue] = useState("");
 
   /* -------------------------------------------------------------------------- */
   /*                              Handlers                                      */
@@ -21,6 +22,8 @@ const useLogic = () => {
     selectedTask,
     setSelectedTask,
     toggleDialog,
+    searchedValue,
+    setSearchedValue,
   };
 };
 
