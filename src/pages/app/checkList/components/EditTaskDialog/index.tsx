@@ -13,13 +13,8 @@ export interface Props {
   task: TaskModel;
 }
 const EditTaskDialog = ({ task, isOpen, onClose }: Props) => {
-  const {
-    control,
-    handleSubmit,
-    isDirty,
-    updateTaskHandler,
-    isValid,
-  } = useLogic({ task });
+  const { control, handleSubmit, isDirty, updateTaskHandler, isValid } =
+    useLogic({ task });
   return (
     <>
       <Dialog
@@ -43,11 +38,11 @@ const EditTaskDialog = ({ task, isOpen, onClose }: Props) => {
               )}
             />
           </div>
-          <div className="flex justify-between  items-center">
+          <div className="flex items-center  justify-between">
             <div className="flex gap-1">
               <Button
                 type="submit"
-                disabled={!isValid}
+                disabled={!isValid || !isDirty}
                 onClick={() => {
                   handleSubmit(updateTaskHandler(task.getId()))();
                   onClose();
@@ -57,13 +52,12 @@ const EditTaskDialog = ({ task, isOpen, onClose }: Props) => {
                 Update
               </Button>
               <Button onClick={onClose} variant={"outline"}>
-                {isDirty ? "Discard" : "Close"}
+                Close
               </Button>
             </div>
           </div>
         </form>
       </Dialog>
-
     </>
   );
 };

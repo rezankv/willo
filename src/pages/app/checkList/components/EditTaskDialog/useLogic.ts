@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  useEffect } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 // ** validations
@@ -16,8 +16,7 @@ interface IUseLogic {
   task: Props["task"];
 }
 const useLogic = ({ task }: IUseLogic) => {
-
-const {updateTask} = useStorage()
+  const { updateTask } = useStorage();
 
   const {
     control,
@@ -34,17 +33,14 @@ const {updateTask} = useStorage()
     },
   });
 
-
   /* -------------------------------------------------------------------------- */
   /*                              Handlers                                      */
   /* -------------------------------------------------------------------------- */
 
   const updateTaskHandler = (taskId: string) => (data: UpdateTaskSchema) => {
     updateTask(taskId, data);
-    reset();
     toast.success("Task Updated!");
   };
-
 
   const initializeFormHandler = () =>
     reset({
