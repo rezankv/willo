@@ -4,6 +4,9 @@ import { Head, ScrollArea } from "@components";
 // ** hooks
 import { useStorage } from "@hooks";
 
+// ** models
+import { TaskModel } from "@models";
+
 // ** locals
 import Sidebar from "./components/Sidebar";
 import Searchbar from "./components/Searchbar";
@@ -24,26 +27,34 @@ const RootLayout = () => {
 
   const { getTasks } = useStorage();
 
+  const renderTaskRows = (tasks: TaskModel[]) =>
+    !tasks.length ? (
+      <div className="mt-2 text-center text-[15px] font-medium text-text-light">
+        No Items Found!
+      </div>
+    ) : (
+      tasks.map((task) => (
+        <TaskRow
+          key={task.getId()}
+          onClick={() => {
+            setSelectedTask(task);
+            toggleDialog(true);
+          }}
+          task={task}
+        />
+      ))
+    );
   return (
     <>
-      <Head title="Willo | Checklist"/>
+      <Head title="Willo | Checklist" />
       <Context.Provider value={{ setIsSidebarOpen, isSidebarOpen }}>
         <div className="bg-background">
           <div className="flex w-full">
             <Sidebar />
             <div className="relative w-full ">
               <Searchbar />
-              <ScrollArea className="h-[30rem] w-full rounded-md border p-4">
-                {getTasks().map((item) => (
-                  <TaskRow
-                    key={item.getId()}
-                    onClick={() => {
-                      setSelectedTask(item);
-                      toggleDialog(true);
-                    }}
-                    task={item}
-                  />
-                ))}
+              <ScrollArea className="h-[30rem] w-full rounded-md border ">
+                {renderTaskRows(getTasks())}
               </ScrollArea>
             </div>
           </div>
