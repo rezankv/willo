@@ -23,7 +23,7 @@ const Searchbar = () => {
         <SearchIcon />
         <Input
           placeholder="search here..."
-          className="border-none font-light !shadow-none focus-visible:border-none"
+          className="focus-visible:ring-0 w-full border-none font-light !shadow-none !focus-visible:border-none"
         />
       </div>
       <Menu
