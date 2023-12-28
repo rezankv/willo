@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const useLogic = () => {
   const [isDeleteTaskDialogOpen, setIsDeleteTaskDialogOpen] = useState(false);
+  const [isEditTaskDialogOpen, setIsEditTaskDialogOpen] = useState(false);
 
   /* -------------------------------------------------------------------------- */
   /*                              Handlers                                      */
@@ -9,10 +10,15 @@ const useLogic = () => {
 
   const toggleDeleteTaskDialogHandler = (state: boolean) =>
     setIsDeleteTaskDialogOpen(state);
-    
+
+  const toggleEditTaskDialogHandler = (state: boolean) =>
+    setIsEditTaskDialogOpen(state);
+
   return {
     isDeleteTaskDialogOpen,
+    isEditTaskDialogOpen,
     toggleDeleteTaskDialogHandler,
+    toggleEditTaskDialogHandler,
   };
 };
 

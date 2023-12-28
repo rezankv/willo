@@ -10,11 +10,11 @@ import { Menu, CardRow, Input } from "@components";
 import { useStorage } from "@hooks";
 
 // ** locals
-import LayoutContext from "../../context";
+import Context from "../../context";
 
 const Searchbar = () => {
   const { setIsSidebarOpen, setSearchedValue, searchedValue } =
-    useContext(LayoutContext);
+    useContext(Context);
   const { sortTasks } = useStorage();
   return (
     <CardRow className="flex h-14 items-center px-2">

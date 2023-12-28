@@ -18,12 +18,23 @@ import { TrashIcon } from "@assets/icons";
 // ** locals
 import useLogic from "./useLogic";
 import DeleteTaskDialog from "./components/DeleteTaskDialog";
+import EditTaskDialog from "./components/EditTaskDialog";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   task: TaskModel;
 }
-const TaskRow = ({ task, className = "", ...props }: Props) => {
-  const { toggleDeleteTaskDialogHandler, isDeleteTaskDialogOpen } = useLogic();
+const TaskRow = ({
+  task,
+  className = "",
+  onClick = () => undefined,
+  ...props
+}: Props) => {
+  const {
+    toggleDeleteTaskDialogHandler,
+    isDeleteTaskDialogOpen,
+    isEditTaskDialogOpen,
+    toggleEditTaskDialogHandler,
+  } = useLogic();
 
   return (
     <>
@@ -32,6 +43,10 @@ const TaskRow = ({ task, className = "", ...props }: Props) => {
           "hover: group  flex h-14 transform items-center justify-between px-3 transition hover:-translate-y-1",
           className,
         )}
+        onClick={(e) => {
+          toggleEditTaskDialogHandler(true);
+          onClick(e);
+        }}
         {...props}
       >
         <div className="flex gap-2">
@@ -55,9 +70,14 @@ const TaskRow = ({ task, className = "", ...props }: Props) => {
         </div>
       </CardRow>
       <DeleteTaskDialog
-        task={task}
         isOpen={isDeleteTaskDialogOpen}
         onClose={() => toggleDeleteTaskDialogHandler(false)}
+        task={task}
+      />
+      <EditTaskDialog
+        isOpen={isEditTaskDialogOpen}
+        onClose={() => toggleEditTaskDialogHandler(false)}
+        task={task}
       />
     </>
   );

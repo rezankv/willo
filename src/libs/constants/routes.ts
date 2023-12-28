@@ -4,5 +4,15 @@ export const LANDING_ROUTE = `${ROOT_ROUTE}/`;
 
 export const APP_ROUTE = `${ROOT_ROUTE}/app`;
 export const APP_CHECKLIST_ROUTE = `${APP_ROUTE}/checklist`;
+export const APP_CHECKLIST_ALL_TASKS_ROUTE = `${APP_CHECKLIST_ROUTE}/all`;
+export const APP_CHECKLIST_IMPORTANT_TASKS_ROUTE = `${APP_CHECKLIST_ROUTE}/important`;
+export const APP_CHECKLIST_COMPLETED_TASKS_ROUTE = `${APP_CHECKLIST_ROUTE}/completed`;
+export const APP_CHECKLIST_DELETED_TASKS_ROUTE = `${APP_CHECKLIST_ROUTE}/deleted`;
+export const APP_CHECKLIST_TAGS_ROUTE = `${APP_CHECKLIST_ROUTE}/tags`;
+export const APP_CHECKLIST_TAGS_HIGH_ROUTE = `${APP_CHECKLIST_TAGS_ROUTE}/high`;
+export const APP_CHECKLIST_TAGS_MEDIUM_ROUTE = `${APP_CHECKLIST_TAGS_ROUTE}/medium`;
+export const APP_CHECKLIST_TAGS_LOW_ROUTE = `${APP_CHECKLIST_TAGS_ROUTE}/low`;
+
+
 export const APP_BOARD_ROUTE = `${APP_ROUTE}/board`;
 export const APP_CALENDAR_ROUTE = `${APP_ROUTE}/calendar`;

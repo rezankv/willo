@@ -10,7 +10,15 @@ import {
 import {
   APP_BOARD_ROUTE,
   APP_CALENDAR_ROUTE,
+  APP_CHECKLIST_ALL_TASKS_ROUTE,
+  APP_CHECKLIST_COMPLETED_TASKS_ROUTE,
+  APP_CHECKLIST_DELETED_TASKS_ROUTE,
+  APP_CHECKLIST_IMPORTANT_TASKS_ROUTE,
   APP_CHECKLIST_ROUTE,
+  APP_CHECKLIST_TAGS_HIGH_ROUTE,
+  APP_CHECKLIST_TAGS_LOW_ROUTE,
+  APP_CHECKLIST_TAGS_MEDIUM_ROUTE,
+  APP_CHECKLIST_TAGS_ROUTE,
   APP_ROUTE,
   LANDING_ROUTE,
 } from "@constants";
@@ -34,10 +42,17 @@ const router = createBrowserRouter([
     path: APP_ROUTE,
     element: <AppLayout />,
     children: [
-      {
-        path: APP_CHECKLIST_ROUTE,
-        element: <CheckListPage />,
-      },
+      ...[
+        APP_CHECKLIST_ALL_TASKS_ROUTE,
+        APP_CHECKLIST_COMPLETED_TASKS_ROUTE,
+        APP_CHECKLIST_IMPORTANT_TASKS_ROUTE,
+        APP_CHECKLIST_DELETED_TASKS_ROUTE,
+        APP_CHECKLIST_TAGS_HIGH_ROUTE,
+        APP_CHECKLIST_TAGS_MEDIUM_ROUTE,
+        APP_CHECKLIST_TAGS_LOW_ROUTE,
+        APP_CHECKLIST_TAGS_ROUTE,
+      ].map((path) => ({ path, element: <CheckListPage /> })),
+
       {
         path: APP_BOARD_ROUTE,
         element: <BoardPage />,
@@ -46,10 +61,10 @@ const router = createBrowserRouter([
         path: APP_CALENDAR_ROUTE,
         element: <CalendarPage />,
       },
-      {
-        path: APP_ROUTE,
-        element: <Navigate to={APP_CHECKLIST_ROUTE} />,
-      },
+      ...[APP_ROUTE, APP_CHECKLIST_ROUTE].map((path) => ({
+        path,
+        element: <Navigate to={APP_CHECKLIST_ALL_TASKS_ROUTE} />,
+      })),
     ],
   },
 

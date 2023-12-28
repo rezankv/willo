@@ -1,4 +1,6 @@
 import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 
 // ** components
 import { BackDrop, Button } from "@components";
@@ -15,6 +17,16 @@ import {
 // ** utils
 import { cn } from "@utils";
 
+// ** constants
+import {
+  APP_CHECKLIST_ALL_TASKS_ROUTE,
+  APP_CHECKLIST_COMPLETED_TASKS_ROUTE,
+  APP_CHECKLIST_DELETED_TASKS_ROUTE,
+  APP_CHECKLIST_IMPORTANT_TASKS_ROUTE,
+  APP_CHECKLIST_TAGS_HIGH_ROUTE,
+  APP_CHECKLIST_TAGS_LOW_ROUTE,
+} from "@constants";
+
 // ** locals
 import CreateTaskDialog from "./components/CreateTaskDialog";
 import useLogic from "./useLogic";
@@ -23,6 +35,48 @@ import LayoutContext from "../../context";
 const Sidebar = () => {
   const { isCreateTaskDialogOpen, toggleDialog } = useLogic();
   const { isSidebarOpen, setIsSidebarOpen } = useContext(LayoutContext);
+
+  const sidebarItems = {
+    primaries: [
+      {
+        label: "My Tasks",
+        path: APP_CHECKLIST_ALL_TASKS_ROUTE,
+        icon: <MailIcon />,
+      },
+      {
+        label: "Important Tasks",
+        path: APP_CHECKLIST_IMPORTANT_TASKS_ROUTE,
+        icon: <StarIcon />,
+      },
+      {
+        label: "Completed",
+        path: APP_CHECKLIST_COMPLETED_TASKS_ROUTE,
+        icon: <CheckIcon />,
+      },
+      {
+        label: "Deleted",
+        path: APP_CHECKLIST_DELETED_TASKS_ROUTE,
+        icon: <TrashIcon />,
+      },
+    ],
+    tags: [
+      {
+        label: "High",
+        path: APP_CHECKLIST_TAGS_HIGH_ROUTE,
+        icon: <span className="h-2 w-2 rounded-full bg-error"></span>,
+      },
+      {
+        label: "Medium",
+        path: APP_CHECKLIST_TAGS_LOW_ROUTE,
+        icon: <span className="h-2 w-2 rounded-full bg-orange"></span>,
+      },
+      {
+        label: "Low",
+        path: APP_CHECKLIST_TAGS_LOW_ROUTE,
+        icon: <span className="h-2 w-2 rounded-full bg-green"></span>,
+      },
+    ],
+  };
   return (
     <>
       <BackDrop
@@ -38,7 +92,7 @@ const Sidebar = () => {
         >
           <div
             className={cn(
-              "  w-60 overflow-y-auto border-l border-r bg-background-paper px-5 py-8 sm:w-64 ",
+              "   overflow-y-auto border-l border-r bg-background-paper px-5 py-8  ",
             )}
           >
             <div className="relative ">
@@ -49,40 +103,16 @@ const Sidebar = () => {
 
             <nav className="-mx-3 mt-4">
               <div className="space-y-3">
-                <a
-                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300  hover:bg-gray-100     hover:text-gray-700"
-                  href="#"
-                >
-                  <MailIcon />
-
-                  <span className="mx-2 text-sm font-medium">My Tasks</span>
-                </a>
-
-                <a
-                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300   hover:bg-gray-100     hover:text-gray-700"
-                  href="#"
-                >
-                  <StarIcon />
-
-                  <span className="mx-2 text-sm font-medium">Importants</span>
-                </a>
-                <a
-                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300   hover:bg-gray-100     hover:text-gray-700"
-                  href="#"
-                >
-                  <CheckIcon />
-
-                  <span className="mx-2 text-sm font-medium">Completed</span>
-                </a>
-
-                <a
-                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300   hover:bg-gray-100 hover:text-gray-700"
-                  href="#"
-                >
-                  <TrashIcon />
-
-                  <span className="mx-2 text-sm font-medium">Deleted</span>
-                </a>
+                {sidebarItems.primaries.map(({ path, icon, label }) => (
+                  <Link
+                    key={uuidv4()}
+                    className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300   hover:bg-gray-100     hover:text-gray-700"
+                    to={path}
+                  >
+                    {icon}
+                    <span className="mx-2 text-sm font-medium">{label}</span>
+                  </Link>
+                ))}
               </div>
 
               <div className="mt-10 space-y-3">
@@ -93,41 +123,19 @@ const Sidebar = () => {
                   <PlusIcon />
                 </div>
                 <div className="space-y-3">
-                  <a
-                    href="#"
-                    className="flex transform items-center gap-3 rounded-lg px-3 py-1 text-sm text-gray-600 transition-colors duration-300  "
-                  >
-                    <span className="h-2 w-2 rounded-full bg-purple"></span>
-                    <span className="font-medium">Team</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex transform items-center gap-3 rounded-lg px-3 py-1 text-sm text-gray-600 transition-colors duration-300  "
-                  >
-                    <span className="h-2 w-2 rounded-full bg-error"></span>
-                    <span className="font-medium">High</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex transform items-center gap-3 rounded-lg px-3 py-1 text-sm text-gray-600 transition-colors duration-300  "
-                  >
-                    <span className="h-2 w-2 rounded-full bg-green"></span>
-                    <span className="font-medium">Low</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex transform items-center gap-3 rounded-lg px-3 py-1 text-sm text-gray-600 transition-colors duration-300  "
-                  >
-                    <span className="h-2 w-2 rounded-full bg-orange"></span>
-                    <span className="font-medium">Medium</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex transform items-center gap-3 rounded-lg px-3 py-1 text-sm text-gray-600 transition-colors duration-300  "
-                  >
-                    <span className="h-2 w-2 rounded-full bg-cyan"></span>
-                    <span className="font-medium">Update</span>
-                  </a>
+                  {sidebarItems.tags.map(({ icon, label, path }) => (
+                    <Link
+                      to={path}
+                      className="flex transform items-center gap-3 rounded-lg px-3 py-1 text-sm text-gray-600 transition-colors duration-300  "
+                    >
+                      {icon}
+                      {label}
+                    </Link>
+                  ))}
+                  
+                
+                  
+               
                 </div>
               </div>
             </nav>

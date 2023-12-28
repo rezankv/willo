@@ -4,10 +4,8 @@ import { useState } from "react";
 import { TaskModel } from "@models";
 
 const useLogic = () => {
-  const [isEditTaskDialogOpen, setIsEditTaskDialogOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedTask, setSelectedTask] = useState(new TaskModel());
-  const [searchedValue, setSearchedValue] = useState("");
+  const [isEditTaskDialogOpen, setIsEditTaskDialogOpen] = useState(false);
 
   /* -------------------------------------------------------------------------- */
   /*                              Handlers                                      */
@@ -15,16 +13,7 @@ const useLogic = () => {
 
   const toggleDialog = (state: boolean) => setIsEditTaskDialogOpen(state);
 
-  return {
-    isSidebarOpen,
-    setIsSidebarOpen,
-    isEditTaskDialogOpen,
-    selectedTask,
-    setSelectedTask,
-    toggleDialog,
-    searchedValue,
-    setSearchedValue,
-  };
+  return { selectedTask, setSelectedTask, toggleDialog, isEditTaskDialogOpen };
 };
 
 export default useLogic;
