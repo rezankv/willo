@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 // ** assets
-import {HamburgerIcon,SearchIcon} from "@assets/icons";
+import { HamburgerIcon, SearchIcon } from "@assets/icons";
 
 // ** components
 import { Menu, CardRow, Input } from "@components";
@@ -23,7 +23,7 @@ const Searchbar = () => {
         <SearchIcon />
         <Input
           placeholder="search here..."
-          className="focus-visible:ring-0 w-full border-none font-light !shadow-none !focus-visible:border-none"
+          className=" w-full border-none font-light !shadow-none focus-visible:ring-transparent"
         />
       </div>
       <Menu
