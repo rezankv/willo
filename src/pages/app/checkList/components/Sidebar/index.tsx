@@ -44,22 +44,22 @@ const Sidebar = () => {
       {
         label: "My Tasks",
         path: APP_CHECKLIST_ALL_TASKS_ROUTE,
-        icon: <MailIcon />,
+        icon: <MailIcon className='w-[18px] h-[18px]'/>,
       },
       {
         label: "Important Tasks",
         path: APP_CHECKLIST_IMPORTANT_TASKS_ROUTE,
-        icon: <StarIcon />,
+        icon: <StarIcon className='w-[18px] h-[18px]'/>,
       },
       {
         label: "Completed",
         path: APP_CHECKLIST_COMPLETED_TASKS_ROUTE,
-        icon: <CheckIcon />,
+        icon: <CheckIcon className='w-[18px] h-[18px]'/>,
       },
       {
         label: "Deleted",
         path: APP_CHECKLIST_DELETED_TASKS_ROUTE,
-        icon: <TrashIcon />,
+        icon: <TrashIcon className='w-[18px] h-[18px]'/>,
       },
     ],
     tags: [
