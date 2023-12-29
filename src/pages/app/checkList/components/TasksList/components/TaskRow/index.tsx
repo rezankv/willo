@@ -40,7 +40,7 @@ const TaskRow = ({
     <>
       <CardRow
         className={cn(
-          "hover: group flex  h-14 transform items-center justify-between border-b-0 border-l-0 border-r-0 px-3 shadow-none transition hover:-translate-y-1 hover:shadow  ",
+          "hover: group flex  h-14 transform items-center justify-between border-b-0 border-l-0 border-r-0 px-3 shadow-none transition first:border-t-0 hover:-translate-y-1  hover:shadow ",
           className,
         )}
         onClick={(e) => {

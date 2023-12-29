@@ -17,7 +17,7 @@ const Searchbar = () => {
     useContext(Context);
   const { sortTasks } = useStorage();
   return (
-    <CardRow className="flex h-14 items-center border-b-0 border-l-0 border-r-0 px-2  ">
+    <CardRow className="flex h-14 items-center  border-l-0 border-r-0 px-2  ">
       <HamburgerIcon
         onClick={() => {
           setIsSidebarOpen((prevState) => !prevState);
@@ -36,7 +36,7 @@ const Searchbar = () => {
         <Input
           onChange={(e) => setSearchedValue(e.target.value || "")}
           placeholder="search here..."
-          className="  w-full border-none font-light !shadow-none focus-visible:ring-transparent"
+          className="w-full border-none font-normal  text-text-light !shadow-none focus-visible:ring-transparent"
           value={searchedValue}
         />
       </div>
