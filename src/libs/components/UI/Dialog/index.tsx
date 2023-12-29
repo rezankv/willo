@@ -129,7 +129,7 @@ export const Dialog = ({
       <BackDrop
         onClick={(open) => !open && onClose()}
         isShow={open}
-        className="z-dialog-backdrop"
+        className="!z-dialog-backdrop"
       >
         <DialogContent className="z-dialog">
           <DialogHeader>
