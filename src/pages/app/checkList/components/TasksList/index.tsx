@@ -27,7 +27,7 @@ const TasksList = () => {
 
   return (
     <>
-      <ScrollArea className="h-[30rem] w-full rounded-md border ">
+      <ScrollArea className="h-[30rem] w-full  border-none  bg-background-paper">
         {renderTaskRows(getTasks(searchedValue))}
       </ScrollArea>
     </>

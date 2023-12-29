@@ -17,12 +17,12 @@ const Searchbar = () => {
     useContext(Context);
   const { sortTasks } = useStorage();
   return (
-    <CardRow className="flex h-14 items-center px-2">
+    <CardRow className="flex h-14 items-center border-b-0 border-l-0 border-r-0 px-2  ">
       <HamburgerIcon
         onClick={() => {
           setIsSidebarOpen((prevState) => !prevState);
         }}
-        className="text-text md:hidden cursor-pointer"
+        className="cursor-pointer text-text md:hidden"
       />
       <div className=" ml-2 flex flex-grow items-center">
         {searchedValue ? (
