@@ -34,6 +34,7 @@ const TaskRow = ({
     isDeleteTaskDialogOpen,
     isEditTaskDialogOpen,
     toggleEditTaskDialogHandler,
+handleCompleteTask
   } = useLogic();
 
   return (
@@ -51,7 +52,10 @@ const TaskRow = ({
       >
         <div className="flex gap-2">
           <Drag className="h-4 w-4  cursor-move fill-text-mutated  group-hover:opacity-100 lg:opacity-0" />
-          <Checkbox />
+          <Checkbox onClick={(e)=>{
+            e.stopPropagation()
+            handleCompleteTask(task)
+          }} />
           <p className="text-sm font-light text-text">{task.getTitle()}</p>
         </div>
         <div className="flex items-center justify-center gap-2">

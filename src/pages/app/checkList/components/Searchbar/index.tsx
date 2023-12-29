@@ -17,7 +17,7 @@ const Searchbar = () => {
     useContext(Context);
   const { sortTasks } = useStorage();
   return (
-    <CardRow className="flex h-14 items-center  border-l-0 border-r-0 px-2  ">
+    <CardRow className="flex  items-center  border-l-0 border-r-0 px-2 h-[50px] ">
       <HamburgerIcon
         onClick={() => {
           setIsSidebarOpen((prevState) => !prevState);
