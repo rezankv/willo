@@ -64,7 +64,7 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
 
   sortTasks: (type) => {
     const tasks = get().tasks.sort(
-      (a, b) => a.props?.title?.localeCompare(b.props?.title),
+      (a, b) => a.props?.title?.localeCompare(b.props?.title || '') || 0,
     );
     type === "A-Z" ? set({ tasks }) : set({ tasks: tasks.reverse() });
   },
