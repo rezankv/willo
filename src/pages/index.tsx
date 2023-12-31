@@ -19,7 +19,7 @@ const LandingPage = () => (
     <Navbar />
     <section className="px-4">
       <GradientWrapper
-        wrapperClassName="inset-0"
+        parentClassName="inset-0"
         className="custom-screen text-gray-600"
       >
         <div className="mx-auto max-w-4xl space-y-5 text-center">

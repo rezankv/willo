@@ -1,3 +1,5 @@
+import { Outlet } from "react-router-dom";
+
 // ** components
 import { Head } from "@components";
 
@@ -5,9 +7,8 @@ import { Head } from "@components";
 import Sidebar from "./components/Sidebar";
 import Searchbar from "./components/Searchbar";
 import { Provider } from "./context";
-import TasksList from "./components/TasksList";
 
-const ChecklistPage = () => {
+const ChecklistLayout = () => {
   return (
     <>
       <Head title="Willo | Checklist" />
@@ -17,7 +18,7 @@ const ChecklistPage = () => {
             <Sidebar />
             <div className="relative w-full ">
               <Searchbar />
-              <TasksList />
+              <Outlet />
             </div>
           </div>
         </div>
@@ -26,4 +27,4 @@ const ChecklistPage = () => {
   );
 };
 
-export default ChecklistPage;
+export default ChecklistLayout;

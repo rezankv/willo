@@ -2,13 +2,13 @@ import { HTMLAttributes, ReactNode } from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
-  wrapperClassName?: string;
+  parentClassName?: string;
 }
 const GradientWrapper = ({ children, ...props }: Props) => (
   <div {...props} className={`relative py-28 ${props.className || ""}`}>
     <div
       className={`absolute top-12 m-auto h-[250px] max-w-3xl blur-[130px] ${
-        props.wrapperClassName || ""
+        props.parentClassName || ""
       }`}
       style={{
         background:

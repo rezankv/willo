@@ -16,10 +16,15 @@ interface TaskSlice {
   getTasks: (taskTitle?: string, page?: number, limit?: number) => TaskModel[];
   createTask: (data: CreateTaskSchema) => void;
   updateTask: (taskId: string, data: UpdateTaskSchema) => void;
-  getTaskById: (taskId: string) => void;
+  getTaskById: (taskId: string) => TaskModel;
   deleteTask: (taskId: string) => void;
   sortTasks: (type: "A-Z" | "Z-A") => void;
   completeTask: (taskId: string) => void;
+  getCompletedTasks: () => TaskModel[];
+  getDeletedTasks: () => TaskModel[];
+  getImportantTasks: () => TaskModel[];
+  getAvailableTasks: () => TaskModel[];
+
 }
 
 // ** addItem: (newItem) => set((state) => ({ items: [...state.items, newItem] })),
@@ -28,7 +33,6 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
   set,
   get,
 ) => ({
-  // ! if you need the 'tasks' list in components use 'getTasks' function
   tasks: [] as TaskModel[],
 
   getTasks: (taskTitle = "", page = 1, limit = 10) => {
@@ -43,33 +47,62 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
 
   createTask: (data: CreateTaskSchema) =>
     set((state) => ({ tasks: [...state.tasks, new TaskModel(data)] })),
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  updateTask: (taskId: string, { id, ...rest }: UpdateTaskSchema) =>
+
+  updateTask: (taskId: string, data: UpdateTaskSchema) => {
+    const selectedTask = get().getTaskById(taskId);
+    const updatedTask = new TaskModel({ ...selectedTask.props, ...data });
     set((s) => ({
-      tasks: s.tasks.map((task) =>
-        task.props?.id === taskId
-          ? new TaskModel({ ...task, ...rest, id: taskId })
-          : task,
-      ),
-    })),
+      tasks: s
+        .getTasks()
+        .map((task) => (task.getId() === taskId ? updatedTask : task)),
+    }));
+  },
 
   getTaskById: (taskId: string) =>
-    get().tasks.find((task) => task.getId() === taskId) || new TaskModel(),
+    get()
+      .getTasks()
+      .find((task) => task.getId() === taskId) || new TaskModel(),
 
-  deleteTask: (taskId: string) =>
-    set(({ tasks }) => ({
-      tasks: tasks.filter((task) => task.props?.id !== taskId),
-    })),
+  deleteTask: (taskId: string) => {
+    const selectedTask = get().getTaskById(taskId);
+    const updatedTask = new TaskModel({
+      ...selectedTask.props,
+      isDeleted: true,
+    });
 
+    set((s) => ({
+      tasks: s
+        .getTasks()
+        .map((task) => (task.getId() === taskId ? updatedTask : task)),
+    }));
+  },
   sortTasks: (type) => {
     const tasks = get().tasks.sort(
-      (a, b) => a.props?.title?.localeCompare(b.props?.title || '') || 0,
+      (a, b) => a.props?.title?.localeCompare(b.props?.title || "") || 0,
     );
     type === "A-Z" ? set({ tasks }) : set({ tasks: tasks.reverse() });
   },
 
   completeTask: (taskId) => get().updateTask(taskId, { isCompleted: true }),
+
+  getAvailableTasks: () =>
+    get()
+      .getTasks()
+      .filter((task) => !task.getIsDeleted()),
+
+  getCompletedTasks: () =>
+    get()
+      .getTasks()
+      .filter((task) => task.getIsCompleted()),
+  getDeletedTasks: () =>
+    get()
+      .getTasks()
+      .filter((task) => task.getIsDeleted()),
+  getImportantTasks: () =>
+    get()
+      .getTasks()
+      .filter((task) => task.getIsImportant()),
 });
 
 /* -------------------------------------------------------------------------- */
