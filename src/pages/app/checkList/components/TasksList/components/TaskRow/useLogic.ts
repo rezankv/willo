@@ -7,7 +7,7 @@ import { useStorage } from "@hooks";
 import { TaskModel } from "@models";
 
 const useLogic = () => {
-  const { completeTask } = useStorage();
+  const { toggleTaskCompletion } = useStorage();
 
   const [isDeleteTaskDialogOpen, setIsDeleteTaskDialogOpen] = useState(false);
   const [isEditTaskDialogOpen, setIsEditTaskDialogOpen] = useState(false);
@@ -22,14 +22,15 @@ const useLogic = () => {
   const toggleEditTaskDialogHandler = (state: boolean) =>
     setIsEditTaskDialogOpen(state);
 
-  const handleCompleteTask = (task: TaskModel) => completeTask(task.getId());
+  const handleToggleTaskCompletion = (task: TaskModel, isCompleted: boolean) =>
+    toggleTaskCompletion(task.getId(), isCompleted);
 
   return {
     isDeleteTaskDialogOpen,
     isEditTaskDialogOpen,
     toggleDeleteTaskDialogHandler,
     toggleEditTaskDialogHandler,
-    handleCompleteTask,
+    handleToggleTaskCompletion,
   };
 };
 

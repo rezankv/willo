@@ -19,12 +19,11 @@ interface TaskSlice {
   getTaskById: (taskId: string) => TaskModel;
   deleteTask: (taskId: string) => void;
   sortTasks: (type: "A-Z" | "Z-A") => void;
-  completeTask: (taskId: string) => void;
+  toggleTaskCompletion: (taskId: string, isCompleted: boolean) => void;
   getCompletedTasks: () => TaskModel[];
   getDeletedTasks: () => TaskModel[];
   getImportantTasks: () => TaskModel[];
   getAvailableTasks: () => TaskModel[];
-
 }
 
 // ** addItem: (newItem) => set((state) => ({ items: [...state.items, newItem] })),
@@ -84,8 +83,9 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
     type === "A-Z" ? set({ tasks }) : set({ tasks: tasks.reverse() });
   },
 
-  completeTask: (taskId) => get().updateTask(taskId, { isCompleted: true }),
-
+  toggleTaskCompletion: (taskId, isCompleted) => {
+    get().updateTask(taskId, { isCompleted });
+  },
   getAvailableTasks: () =>
     get()
       .getTasks()
