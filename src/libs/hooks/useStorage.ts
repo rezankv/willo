@@ -45,7 +45,7 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
   },
 
   createTask: (data: CreateTaskSchema) =>
-    set((state) => ({ tasks: [...state.tasks, new TaskModel(data)] })),
+    set((state) => ({ tasks: [new TaskModel(data), ...state.tasks] })),
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   updateTask: (taskId: string, data: UpdateTaskSchema) => {
