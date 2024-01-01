@@ -61,7 +61,14 @@ const TaskRow = ({
             }
             checked={task.getIsCompleted()}
           />
-          <p className="text-sm font-light text-text">{task.getTitle()}</p>
+          <p
+            className={cn(
+              "text-sm font-light text-text",
+              task.getIsCompleted() ? "line-through text-text-mutated" : "",
+            )}
+          >
+            {task.getTitle()}
+          </p>
         </div>
         <div className="flex items-center justify-center gap-2">
           <TrashIcon
