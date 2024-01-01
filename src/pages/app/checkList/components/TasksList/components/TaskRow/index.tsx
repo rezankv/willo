@@ -13,7 +13,7 @@ import { cn } from "@utils";
 import { TaskModel } from "@models";
 
 // ** assets
-import { TrashIcon } from "@assets/icons";
+import { StarIcon, TrashIcon } from "@assets/icons";
 
 // ** locals
 import useLogic from "./useLogic";
@@ -30,11 +30,12 @@ const TaskRow = ({
   ...props
 }: Props) => {
   const {
-    toggleDeleteTaskDialogHandler,
+    handleToggleDeleteTaskDialogHandler,
     isDeleteTaskDialogOpen,
     isEditTaskDialogOpen,
-    toggleEditTaskDialogHandler,
+    handleToggleEditTaskDialogHandler,
     handleToggleTaskCompletion,
+    handleToggleTaskImportant,
   } = useLogic();
 
   return (
@@ -45,7 +46,7 @@ const TaskRow = ({
           className,
         )}
         onClick={(e) => {
-          toggleEditTaskDialogHandler(true);
+          handleToggleEditTaskDialogHandler(true);
           onClick(e);
         }}
         {...props}
@@ -64,7 +65,7 @@ const TaskRow = ({
           <p
             className={cn(
               "text-sm font-light text-text",
-              task.getIsCompleted() ? "line-through text-text-mutated" : "",
+              task.getIsCompleted() ? "text-text-mutated line-through" : "",
             )}
           >
             {task.getTitle()}
@@ -75,7 +76,19 @@ const TaskRow = ({
             className="  h-4 w-4 cursor-pointer hover:text-error group-hover:opacity-100 lg:opacity-0"
             onClick={(e) => {
               e.stopPropagation();
-              toggleDeleteTaskDialogHandler(true);
+              handleToggleDeleteTaskDialogHandler(true);
+            }}
+          />
+          <StarIcon
+            className={cn(
+              "h-4 w-4 cursor-pointer hover:text-yellow-500 group-hover:opacity-100 lg:opacity-0",
+              task.getIsImportant()
+                ? "fill-yellow-500 text-yellow-500 lg:opacity-100"
+                : "",
+            )}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleToggleTaskImportant(task, !task.getIsImportant());
             }}
           />
           <Badge
@@ -87,12 +100,12 @@ const TaskRow = ({
       </CardRow>
       <DeleteTaskDialog
         isOpen={isDeleteTaskDialogOpen}
-        onClose={() => toggleDeleteTaskDialogHandler(false)}
+        onClose={() => handleToggleDeleteTaskDialogHandler(false)}
         task={task}
       />
       <EditTaskDialog
         isOpen={isEditTaskDialogOpen}
-        onClose={() => toggleEditTaskDialogHandler(false)}
+        onClose={() => handleToggleEditTaskDialogHandler(false)}
         task={task}
       />
     </>

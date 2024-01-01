@@ -8,7 +8,7 @@ import { TaskModel } from "@models";
 import { CreateTaskSchema, UpdateTaskSchema } from "@validations";
 
 /* -------------------------------------------------------------------------- */
-/*                              Slices                                      */
+/*                              Task Slice                                    */
 /* -------------------------------------------------------------------------- */
 
 interface TaskSlice {
@@ -20,13 +20,12 @@ interface TaskSlice {
   deleteTask: (taskId: string) => void;
   sortTasks: (type: "A-Z" | "Z-A") => void;
   toggleTaskCompletion: (taskId: string, isCompleted: boolean) => void;
+  toggleTaskImportant: (taskId: string, isImportant: boolean) => void;
   getCompletedTasks: () => TaskModel[];
   getDeletedTasks: () => TaskModel[];
   getImportantTasks: () => TaskModel[];
   getAvailableTasks: () => TaskModel[];
 }
-
-// ** addItem: (newItem) => set((state) => ({ items: [...state.items, newItem] })),
 
 const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
   set,
@@ -46,7 +45,6 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
 
   createTask: (data: CreateTaskSchema) =>
     set((state) => ({ tasks: [new TaskModel(data), ...state.tasks] })),
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   updateTask: (taskId: string, data: UpdateTaskSchema) => {
     const selectedTask = get().getTaskById(taskId);
@@ -76,6 +74,7 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
         .map((task) => (task.getId() === taskId ? updatedTask : task)),
     }));
   },
+
   sortTasks: (type) => {
     const tasks = get().tasks.sort(
       (a, b) => a.props?.title?.localeCompare(b.props?.title || "") || 0,
@@ -86,6 +85,10 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
   toggleTaskCompletion: (taskId, isCompleted) => {
     get().updateTask(taskId, { isCompleted });
   },
+
+  toggleTaskImportant: (taskId, isImportant) =>
+    get().updateTask(taskId, { isImportant }),
+
   getAvailableTasks: () =>
     get()
       .getTasks()
@@ -95,10 +98,12 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
     get()
       .getTasks()
       .filter((task) => task.getIsCompleted()),
+
   getDeletedTasks: () =>
     get()
       .getTasks()
       .filter((task) => task.getIsDeleted()),
+
   getImportantTasks: () =>
     get()
       .getTasks()
