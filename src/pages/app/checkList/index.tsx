@@ -13,13 +13,11 @@ const ChecklistLayout = () => {
     <>
       <Head title="Willo | Checklist" />
       <Provider>
-        <div className="bg-background">
-          <div className="flex w-full">
-            <Sidebar />
-            <div className="relative w-full ">
-              <Searchbar />
-              <Outlet />
-            </div>
+        <div className="flex max-h-screen min-h-screen  bg-background">
+          <Sidebar />
+          <div className="relative flex min-h-screen max-h-screen   w-full flex-col">
+            <Searchbar />
+            <Outlet />
           </div>
         </div>
       </Provider>

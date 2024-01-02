@@ -1,6 +1,3 @@
-// ** components
-import { ScrollArea } from "@components";
-
 // ** models
 import { TaskModel } from "@models";
 
@@ -11,7 +8,6 @@ interface Props {
   tasks: TaskModel[];
 }
 const TasksList = ({ tasks }: Props) => {
-
   const renderTaskRows = (tasks: TaskModel[]) =>
     !tasks.length ? (
       <div className="mt-2 text-center text-[15px] font-medium text-text-light">
@@ -23,9 +19,9 @@ const TasksList = ({ tasks }: Props) => {
 
   return (
     <>
-      <ScrollArea className="h-[30rem] w-full  border-none  bg-background-paper">
+      <div className="  w-full  flex-grow overflow-auto  bg-background-paper">
         {renderTaskRows(tasks)}
-      </ScrollArea>
+      </div>
     </>
   );
 };
