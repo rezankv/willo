@@ -102,7 +102,7 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
   getCompletedTasks: () =>
     get()
       .getTasks()
-      .filter((task) => task.getIsCompleted()),
+      .filter((task) => !task.getIsDeleted() && task.getIsCompleted()),
 
   getDeletedTasks: () =>
     get()
@@ -112,7 +112,12 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
   getImportantTasks: () =>
     get()
       .getTasks()
-      .filter((task) => task.getIsImportant()),
+      .filter(
+        (task) =>
+          !task.getIsCompleted() &&
+          !task.getIsDeleted() &&
+          task.getIsImportant(),
+      ),
 });
 
 /* -------------------------------------------------------------------------- */
