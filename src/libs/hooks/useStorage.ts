@@ -13,7 +13,7 @@ import { CreateTaskSchema, UpdateTaskSchema } from "@validations";
 
 interface TaskSlice {
   tasks: TaskModel[];
-  getTasks: (taskTitle?: string, page?: number, limit?: number) => TaskModel[];
+  getTasks: (options?: { filter: (task: TaskModel) => boolean }) => TaskModel[];
   createTask: (data: CreateTaskSchema) => void;
   updateTask: (taskId: string, data: UpdateTaskSchema) => void;
   getTaskById: (taskId: string) => TaskModel;
@@ -24,7 +24,7 @@ interface TaskSlice {
   getCompletedTasks: () => TaskModel[];
   getDeletedTasks: () => TaskModel[];
   getImportantTasks: () => TaskModel[];
-  getAvailableTasks: () => TaskModel[];
+  getAvailableTasks: (query?: { title: string }) => TaskModel[];
 }
 
 const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
@@ -33,14 +33,19 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
 ) => ({
   tasks: [] as TaskModel[],
 
-  getTasks: (taskTitle = "", page = 1, limit = 10) => {
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
-    const tasks = get()
-      .tasks.filter((task) => task.props?.title?.includes(taskTitle))
-      .slice(startIndex, endIndex);
-    const taskModels = tasks.map((task) => new TaskModel(task.props));
+  getTasks: (options) => {
+    const taskModels = get().tasks.map((task) => new TaskModel(task.props));
+    if (options?.filter)
+      return taskModels.filter((task) => options.filter(task));
     return taskModels;
+
+    // const startIndex = (page - 1) * limit;
+    // const endIndex = startIndex + limit;
+    // const tasks = get()
+    //   .tasks.filter((task) => task.props?.title?.includes(taskTitle))
+    //   .slice(startIndex, endIndex);
+    // const taskModels = tasks.map((task) => new TaskModel(task.props));
+    // return taskModels;
   },
 
   createTask: (data: CreateTaskSchema) =>
@@ -89,11 +94,11 @@ const createTaskSlice: StateCreator<TaskSlice, [], [], TaskSlice> = (
   toggleTaskImportant: (taskId, isImportant) =>
     get().updateTask(taskId, { isImportant }),
 
-  getAvailableTasks: () =>
-    get()
-      .getTasks()
-      .filter((task) => !task.getIsDeleted()),
-
+  getAvailableTasks: (query) =>
+    get().getTasks({
+      filter: (task) =>
+        !task.getIsDeleted() && task.getTitle().includes(query?.title || ""),
+    }),
   getCompletedTasks: () =>
     get()
       .getTasks()
