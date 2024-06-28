@@ -18,7 +18,10 @@
       }
     ],
     "paths": {
-      "@willo/*": ["./*"]
+      "@utils": ["./app/_libs/utils"],
+      "@components": ["./app/_libs/components"],
+      "@constants": ["./app/_libs/constants"],
+      "@icons": ["./app/_libs/assets/icons"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
